@@ -7,13 +7,17 @@ Writes a single original roast of the entrant's own AI agent to
 import os
 
 LINES = [
-    "My agent never just does the thing \u2014 it writes a plan, spawns a helper, then proudly reports the plan to me.",
+    "My agent never does the thing \u2014 it writes a plan, spawns a helper, then proudly presents the plan as the finished work.",
 ]
 
 LINE = LINES[0]
 
 
 def main() -> None:
+    if not 1 <= len(LINE) <= 200 or not LINE.strip():
+        raise ValueError(
+            f"entry line must be 1-200 non-whitespace characters, got {len(LINE)}"
+        )
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(LINE + "\n")
